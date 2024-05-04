@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la Réservation</title>
+</head>
+<body>
+    <h1>Détails de la Réservation</h1>
+    <p>ID de la réservation : <%= reservation._id %></p>
+    <p>Catway réservé : <%= reservation.catwayNumber %></p>
+    <p>Nom du client : <%= reservation.clientName %></p>
+    <p>Nom du bateau : <%= reservation.boatName %></p>
+    <p>Date de début : <%= reservation.checkIn %></p>
+    <p>Date de fin : <%= reservation.checkOut %></p>
+</body>
+</html>
+
