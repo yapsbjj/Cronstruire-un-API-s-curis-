@@ -1,5 +1,41 @@
 const catwayModel = require('../models/catwayModel');
 const Catway = require('../models/catwayModel');
+const reservationModel = require('../models/reservationModel');
+
+exports.getAllCatways = async (req, res) => {
+
+};
+
+exports.getCatwayById = async (req, res) => {
+  
+};
+
+exports.createCatway = async (req, res) => {
+
+};
+
+exports.updateCatwayById = async (req, res) => {
+
+};
+
+exports.deleteCatwayById = async (req, res) => {
+
+};
+
+exports.getAllReservationsForCatway = async (req, res) => {
+
+};
+
+exports.getReservationByIdForCatway = async (req, res) => {
+
+};
+
+exports.createReservationForCatway = async (req, res) => {
+  
+};
+
+exports.deleteReservationByIdForCatway = async (req, res) => {
+
 
 exports.getCatwaysPage = async (req, res) => {
   const catways = await catwayModel.getAllCatways();
@@ -36,3 +72,18 @@ exports.createCatway = async (req, res) => {
     res.status(500).send('Erreur serveur lors de la création du catway');
   }
 };
+
+// Contrôleur pour obtenir la liste des catways
+exports.getCatways = async (req, res) => {
+  try {
+    const catways = await Catway.find(); // Récupérer tous les catways depuis la base de données
+    catways.forEach(catway => {
+      console.log(catways); 
+      console.log(`Catway Number: ${catway.catwayNumber}, Type: ${catway.type}, State: ${catway.catwayState}`);
+    });
+    res.send('Catways affichés dans le terminal'); // Envoyer une réponse pour indiquer que les catways ont été affichés dans le terminal
+  } catch (error) {
+    console.error('Erreur lors de la récupération des catways :', error);
+    res.status(500).send('Erreur lors de la récupération des catways');
+  }
+};}

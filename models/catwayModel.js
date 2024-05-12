@@ -27,4 +27,14 @@ const getAllCatways = async () => {
   }
 };
 
-module.exports = { Catway, getAllCatways };
+const getCatwayById = async (catwayId) => {
+  try {
+    const catway = await Catway.findById(catwayId);
+    return catway;
+  } catch (error) {
+    throw new Error('Erreur lors de la récupération de la catway par son identifiant');
+  }
+};
+
+
+module.exports = { Catway, getAllCatways, getCatwayById };

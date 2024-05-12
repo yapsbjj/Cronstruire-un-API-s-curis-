@@ -2,9 +2,17 @@ const express = require('express');
 const router = express.Router();
 const catwayController = require('../controllers/catwayController');
 
-router.get('/', catwayController.getCatwaysPage);
-router.get('/:id', catwayController.getCatwayDetailsPage);
+// Routes catways
+router.get('/catways', catwayController.getAllCatways);
+router.get('/catways/:id', catwayController.getCatwayById);
+router.post('/catways', catwayController.createCatway);
+router.put('/catways/:id', catwayController.updateCatwayById);
+router.delete('/catways/:id', catwayController.deleteCatwayById);
 
-router.post('/', catwayController.createCatway);
+// Routes réservations
+router.get('/catways/:id/reservations', catwayController.getAllReservationsForCatway);
+router.get('/catways/:id/reservations/:idReservation', catwayController.getReservationByIdForCatway);
+router.post('/catways/:id/reservations', catwayController.createReservationForCatway);
+router.delete('/catways/:id/reservations/:idReservation', catwayController.deleteReservationByIdForCatway);
 
 module.exports = router;

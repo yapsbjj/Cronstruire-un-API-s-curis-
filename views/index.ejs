@@ -6,14 +6,19 @@
     <title>Accueil</title>
 </head>
 <body>
-    <h1>Accueil</h1>
-    <p>Bienvenue sur notre application de gestion des réservations de catways.</p>
-    <h2>Routes disponibles :</h2>
-    <ul>
-        <li><a href="/catways">Liste des Catways</a></li>
-        <li><a href="/reservations">Liste des Réservations</a></li>
-        <!-- Ajoutez d'autres routes ici si nécessaire -->
-    </ul>
+    <h1>Port Russel</h1>
+    <h2>Bienvenue sur notre application de gestion des réservations de catways.</h2>
+
+    <h3>Connection a votre tableau de bord</h3>
+    <form action="/login" method="POST">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Se connecter</button>
+    </form>
+    
+   
 </body>
 </html>
 

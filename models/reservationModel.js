@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const reservationSchema = new mongoose.Schema({
   catwayNumber: {
     type: Number,

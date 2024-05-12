@@ -1,44 +1,39 @@
 const express = require('express');
+const mongoose = require('mongoose'); // Importez mongoose
 const app = express();
 const indexRouter = require('./routes/index.js');
-const catwaysRouter = require('./routes/catway.js');
+const catwayRouter = require('./routes/catway.js');
 const reservationsRouter = require('./routes/reservations.js');
 const documentationRouter = require('./routes/documentation.js');
-const { MongoClient } = require('mongodb');
+const authController = require('./controllers/authController.js');
+
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+app.use(express.urlencoded({ extended: true }));
 app.use('/', indexRouter);
-app.use('/catways', catwaysRouter);
+app.use('/catways', catwayRouter);
 app.use('/reservations', reservationsRouter);
 app.use('/documentation', documentationRouter);
+
+app.post('/login', authController.login); 
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Serveur en cours sur le port ${PORT}`);
 });
 
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard');
+});
+
 // URL de connexion à la base de données MongoDB
-const url = 'mongodb://localhost:27017/your_database_name';
+const url = 'mongodb://127.0.0.1:27017/DB';
 
-// Créer une nouvelle instance de connexion MongoDB
-const client = new MongoClient(url);
-
-// Connecter à la base de données MongoDB
-async function connectToDatabase() {
-  try {
-    // Connexion à la base de données
-    await client.connect();
-    console.log('Connection à la base de données avec succès');
-  } catch (error) {
-    console.error('Erreur lors de la connection à la base de données:', error);
-  }
-}
-
-// Appeler la fonction de connexion à la base de données
-connectToDatabase();
-
-
-
-
+// Connectez-vous à la base de données MongoDB avec Mongoose
+mongoose.connect(url)
+  .then(() => console.log('Connexion à MongoDB réussie'))
+  .catch(err => console.error('Erreur de connexion à MongoDB :', err));
