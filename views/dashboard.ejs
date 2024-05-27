@@ -9,12 +9,93 @@
     <h1>Port Russel</h1>
     <h2>Bienvenue sur notre application de gestion des réservations de catways.</h2>
 
-    
     <ul>
         <li><a href="/catways">Liste des Catways</a></li>
         <li><a href="/reservations">Liste des Réservations</a></li>
-        
+        <li><a href="/users">Liste des Utilisateurs</a></li>
     </ul>
+
+    <h3>Formulaires</h3>
+
+    <form action="/create-user" method="POST">
+        <h3>Créer un utilisateur</h3>
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Créer</button>
+    </form>
+
+    <form action="/update-user" method="POST">
+        <h3>Modifier un utilisateur</h3>
+        <label for="userId">ID de l'utilisateur :</label>
+        <input type="text" id="userId" name="userId" required>
+        <button type="submit">Modifier</button>
+    </form>
+
+    <form action="/delete-user" method="POST">
+        <h3>Supprimer un utilisateur</h3>
+        <label for="userIdToDelete">ID de l'utilisateur :</label>
+        <input type="text" id="userIdToDelete" name="userIdToDelete" required>
+        <button type="submit">Supprimer</button>
+    </form>
+
+    <h3>Ajouter un Catway</h3>
+    <form action="/catways" method="POST">
+        <label for="catwayNumber">Numéro de Catway :</label>
+        <input type="number" id="catwayNumber" name="catwayNumber" required>
+        <label for="type">Type :</label>
+        <select id="type" name="type" required>
+            <option value="long">Long</option>
+            <option value="short">Court</option>
+        </select>
+        <label for="catwayState">État :</label>
+        <input type="text" id="catwayState" name="catwayState" required>
+        <button type="submit">Ajouter Catway</button>
+    </form>
+    
+    <h3>Modifier un Catway</h3>
+    <form action="/catways/:id" method="POST">
+        <label for="catwayNumber">Numéro de Catway :</label>
+        <input type="number" id="catwayNumber" name="catwayNumber" required>
+        <label for="type">Type :</label>
+        <select id="type" name="type" required>
+            <option value="long">Long</option>
+            <option value="short">Court</option>
+        </select>
+        <label for="catwayState">État :</label>
+        <input type="text" id="catwayState" name="catwayState" required>
+        <button type="submit">Modifier Catway</button>
+    </form>
+
+    <h2>Créer une nouvelle réservation</h2>
+    <form action="/reservations" method="POST">
+        <input type="number" name="catwayNumber" placeholder="Numéro de catway" required>
+        <input type="text" name="clientName" placeholder="Nom du client" required>
+        <input type="text" name="boatName" placeholder="Nom du bateau" required>
+        <input type="datetime-local" name="checkIn" placeholder="Date d'arrivée" required>
+        <input type="datetime-local" name="checkOut" placeholder="Date de départ" required>
+        <button type="submit">Créer</button>
+    </form>
+
+    <% if (reservations && reservations.length > 0) { %>
+        <h2>Réservations existantes</h2>
+        <ul>
+            <% reservations.forEach(function(reservation) { %>
+                <li>
+                    Catway Numéro: <%= reservation.catwayNumber %> |
+                    Client: <%= reservation.clientName %> |
+                    Bateau: <%= reservation.boatName %> |
+                    Arrivée: <%= reservation.checkIn.toLocaleString() %> |
+                    Départ: <%= reservation.checkOut.toLocaleString() %> |
+                    <form action="/reservations/<%= reservation._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>Aucune réservation disponible.</p>
+    <% } %>
 </body>
 </html>
-

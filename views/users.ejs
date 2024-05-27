@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Utilisateurs</title>
+</head>
+<body>
+  <h1>Liste des Utilisateurs</h1>
+
+  <% if (users && users.length > 0) { %>
+    <ul>
+      <% users.forEach(function(user) { %>
+        <li>
+          <%= user.username %>
+          <form action="/users/<%= user._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button type="submit">Supprimer</button>
+          </form>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>Aucun utilisateur trouvé.</p>
+  <% } %>
+</body>
+</html>

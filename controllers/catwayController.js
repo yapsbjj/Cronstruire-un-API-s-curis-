@@ -2,8 +2,13 @@ const catwayModel = require('../models/catwayModel');
 const Catway = require('../models/catwayModel');
 const reservationModel = require('../models/reservationModel');
 
-exports.getAllCatways = async (req, res) => {
+exports.getCatwaysPage = async (req, res) => {
+  const catways = await catwayModel.getAllCatways();
+  res.render('catways', { catways });
+};
 
+exports.getAllCatways = async (req, res) => {
+  
 };
 
 exports.getCatwayById = async (req, res) => {
@@ -11,7 +16,14 @@ exports.getCatwayById = async (req, res) => {
 };
 
 exports.createCatway = async (req, res) => {
-
+  try {
+    const { name, location } = req.body;
+    const newCatway = new Catway({ name, location });
+    await newCatway.save();
+    res.status(201).send('Catway créé avec succès');
+  } catch (error) {
+    res.status(500).send('Erreur serveur lors de la création du catway');
+  }
 };
 
 exports.updateCatwayById = async (req, res) => {
@@ -34,13 +46,9 @@ exports.createReservationForCatway = async (req, res) => {
   
 };
 
-exports.deleteReservationByIdForCatway = async (req, res) => {
+exports.deleteReservationByIdForCatway = async (req, res) => {};
 
 
-exports.getCatwaysPage = async (req, res) => {
-  const catways = await catwayModel.getAllCatways();
-  res.render('catways', { catways });
-};
 
 exports.getCatwayDetailsPage = async (req, res) => {
   const catwayId = req.params.id;
@@ -86,4 +94,4 @@ exports.getCatways = async (req, res) => {
     console.error('Erreur lors de la récupération des catways :', error);
     res.status(500).send('Erreur lors de la récupération des catways');
   }
-};}
+};

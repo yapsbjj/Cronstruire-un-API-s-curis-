@@ -1,17 +1,17 @@
+// routes/reservations.js
 const express = require('express');
 const router = express.Router();
 const reservationController = require('../controllers/reservationController');
+const isAuthenticated = require('../middleware/authMiddleware');
 
-// Afficher la liste des resa
-router.get('/', reservationController.getReservations);
+// Afficher la liste des réservations (accessible à tous)
+router.get('/', reservationController.listReservations);
 
-// Afficher les détails d'une resa
-router.get('/:id', reservationController.getReservationDetails);
+// Ajouter une nouvelle réservation (accessible uniquement aux utilisateurs authentifiés)
+router.post('/', isAuthenticated, reservationController.createReservation);
 
-// Créer une nouvelle resa
-router.post('/', reservationController.createReservation);
-
-// Supprimer une resa
-router.delete('/:id', reservationController.deleteReservation);
+// Supprimer une réservation (accessible uniquement aux utilisateurs authentifiés)
+router.delete('/:id', isAuthenticated, reservationController.deleteReservation);
 
 module.exports = router;
+
