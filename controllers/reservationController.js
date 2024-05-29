@@ -1,37 +1,26 @@
 const Reservation = require('../models/reservationModel');
 
-// Afficher les résas dans la dashboard
+// Afficher les réservations dans le dashboard
 exports.showDashboard = async (req, res) => {
   try {
     const reservations = await Reservation.find();
-    res.render('dashboard', { reservations });
+    res.render('dashboard', { reservations }); // Passer un seul objet de paramètres
   } catch (err) {
     res.status(500).send(err.message);
   }
 };
 
-// Afficher la liste des résa
+// Afficher la liste des réservations
 exports.listReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find();
-    res.render('reservations', { reservations });
+    res.render('reservations', { reservations }); // Passer un seul objet de paramètres
   } catch (err) {
     res.status(500).send(err.message);
   }
 };
 
-// Afficher les détails d'une résa
-exports.getReservationDetails = async (req, res) => {
-  const reservationId = req.params.id;
-  try {
-    const reservation = await Reservation.findById(reservationId);
-    res.render('reservationDetails', { reservation });
-  } catch (error) {
-    console.error(error);
-    res.status(404).send('Réservation non trouvée');
-  }
-};
-
+// Créer une nouvelle réservation
 exports.createReservation = async (req, res) => {
   const { catwayNumber, clientName, boatName, checkIn, checkOut } = req.body;
   try {
@@ -43,6 +32,7 @@ exports.createReservation = async (req, res) => {
   }
 };
 
+// Supprimer une réservation
 exports.deleteReservation = async (req, res) => {
   const reservationId = req.params.id;
   try {

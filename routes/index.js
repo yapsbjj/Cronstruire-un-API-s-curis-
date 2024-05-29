@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/authController');
-
+const reservationController = require('../controllers/reservationController');
+const isAuthenticated = require('../middleware/authMiddleware');
 
 router.get('/', (req, res) => {
-  res.render('index');
+    res.render('index');
 });
 
-router.post('/login', authController.login);
+// Assurez-vous que cette route utilise le middleware d'authentification
+router.get('/dashboard', isAuthenticated, reservationController.showDashboard);
 
 module.exports = router;

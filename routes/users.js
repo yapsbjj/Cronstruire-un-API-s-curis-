@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/userController');
+const User = require('../models/userModel');
 
-// Afficher la liste des utilisateurs
-router.get('/', userController.getUsers);
-
-// Créer un nouvel utilisateur
-router.post('/', userController.createUser);
-
-// Supprimer un utilisateur
-router.delete('/:id', userController.deleteUser);
+router.post('/create', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const newUser = new User({ username });
+        await User.register(newUser, password);
+        res.send('Utilisateur créé avec succès');
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
 
 module.exports = router;
+

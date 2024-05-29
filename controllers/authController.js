@@ -1,17 +1,18 @@
 const passport = require('passport');
-exports.login = (req, res) => {
-    const { username, password } = req.body;
 
-    if (username === 'yassine' && password === 'DjangoLePython') {
-        res.redirect('/dashboard');
-    } else {
-        res.send('Identifiants de connexion incorrects');
+exports.login = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err);
     }
+    if (!user) {
+      return res.redirect('/login');
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/dashboard');
+    });
+  })(req, res, next);
 };
-
-
-exports.login = passport.authenticate('local', {
-  successRedirect: '/dashboard',
-  failureRedirect: '/login'
-});
-

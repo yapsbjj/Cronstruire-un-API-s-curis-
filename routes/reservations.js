@@ -1,4 +1,3 @@
-// routes/reservations.js
 const express = require('express');
 const router = express.Router();
 const reservationController = require('../controllers/reservationController');
@@ -14,4 +13,3 @@ router.post('/', isAuthenticated, reservationController.createReservation);
 router.delete('/:id', isAuthenticated, reservationController.deleteReservation);
 
 module.exports = router;
-

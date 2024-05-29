@@ -12,7 +12,8 @@ const documentationRouter = require('./routes/documentation.js');
 const usersRouter = require('./routes/users.js');
 const authController = require('./controllers/authController.js');
 const reservationController = require('./controllers/reservationController.js');
-const { isAuthenticated } = require('./middleware/authMiddleware');
+const isAuthenticated = require('./middleware/authMiddleware');
+
 
 // Configurer le moteur de vue
 app.set('view engine', 'ejs');
@@ -46,9 +47,12 @@ app.use('/catways', catwayRouter);
 app.use('/reservations', reservationsRouter);
 app.use('/documentation', documentationRouter);
 app.use('/users', usersRouter);
+
+// Assurez-vous que cette ligne est présente
 app.post('/login', authController.login);
 
-app.get('/dashboard', reservationController.showDashboard);
+// Protéger le tableau de bord avec le middleware isAuthenticated
+app.get('/dashboard', isAuthenticated, reservationController.showDashboard);
 
 const url = 'mongodb://127.0.0.1:27017/DB';
 
