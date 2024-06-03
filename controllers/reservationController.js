@@ -4,7 +4,7 @@ const Reservation = require('../models/reservationModel');
 exports.showDashboard = async (req, res) => {
   try {
     const reservations = await Reservation.find();
-    res.render('dashboard', { reservations }); // Passer un seul objet de paramètres
+    res.render('dashboard', { reservations });
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -14,7 +14,7 @@ exports.showDashboard = async (req, res) => {
 exports.listReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find();
-    res.render('reservations', { reservations }); // Passer un seul objet de paramètres
+    res.render('reservations', { reservations });
   } catch (err) {
     res.status(500).send(err.message);
   }

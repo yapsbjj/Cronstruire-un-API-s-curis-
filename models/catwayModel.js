@@ -12,12 +12,12 @@ const catwaySchema = new mongoose.Schema({
     required: true
   },
   catwayState: String
-});
+}, { collection: 'catways' }); // Spécifiez explicitement le nom de la collection
 
 // Définition du modèle Catway
 const Catway = mongoose.model('Catway', catwaySchema);
 
-//Récupérer tous les catways
+// Récupérer tous les catways
 const getAllCatways = async () => {
   try {
     const catways = await Catway.find();
@@ -35,6 +35,5 @@ const getCatwayById = async (catwayId) => {
     throw new Error('Erreur lors de la récupération de la catway par son identifiant');
   }
 };
-
 
 module.exports = { Catway, getAllCatways, getCatwayById };
