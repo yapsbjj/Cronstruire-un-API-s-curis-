@@ -12,7 +12,7 @@ const catwaySchema = new mongoose.Schema({
     required: true
   },
   catwayState: String
-}, { collection: 'catways' }); // Spécifiez explicitement le nom de la collection
+}, { collection: 'catways' });
 
 // Définition du modèle Catway
 const Catway = mongoose.model('Catway', catwaySchema);

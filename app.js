@@ -54,7 +54,7 @@ app.post('/login', authController.login);
 // Protéger le tableau de bord avec le middleware isAuthenticated
 app.get('/dashboard', isAuthenticated, reservationController.showDashboard);
 
-const url = 'mongodb://127.0.0.1:27017/DB';
+const url = process.env.MONGODB_URI || 'mongodb+srv://adminbg:admin123@cluster0.igwnn3z.mongodb.net/locator';
 
 mongoose.connect(url)
   .then(() => console.log('Connexion à MongoDB réussie'))
