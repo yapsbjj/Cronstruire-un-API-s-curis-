@@ -58,12 +58,19 @@ app.post('/login', authController.login);
 // Protéger le tableau de bord avec le middleware isAuthenticated
 app.get('/dashboard', isAuthenticated, reservationController.showDashboard);
 
-const url = process.env.MONGODB_URI || 'mongodb+srv://admin123:admin123@cluster0.igwnn3z.mongodb.net/locator';
+const uri = 'mongodb+srv://admin123:admin123@cluster0.lvcet.mongodb.net/';
 
-mongoose.connect(url)
-  .then(() => console.log('Connexion à MongoDB réussie'))
-  .catch(err => console.error('Erreur de connexion à MongoDB :', err));
-
+async function connectDB() {
+    try {
+      await mongoose.connect(uri); 
+      console.log('Connexion à MongoDB réussie');
+    } catch (error) {
+      console.error('Erreur lors de la connexion à MongoDB :', error);
+    }
+  }
+  
+  connectDB();
+  
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Serveur en cours sur le port ${PORT}`);
