@@ -33,7 +33,7 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI,
-    ttl: 14 * 24 * 60 * 60 // Sessions valables 14 jours
+    ttl: 14 * 24 * 60 * 60 
   })
 }));
 
@@ -55,7 +55,7 @@ app.use('/users', usersRouter);
 
 // Route pour afficher le formulaire de connexion
 app.get('/login', (req, res) => {
-  res.render('index'); // Assurez-vous que index.ejs contient le formulaire de connexion
+  res.render('index');
 });
 
 // Route pour traiter la connexion avec le contrôleur d'authentification
