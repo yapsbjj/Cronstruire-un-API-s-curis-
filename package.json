@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --loader ts-node/esm"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +25,6 @@
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
-    "mocha": "^10.4.0"
+    "mocha": "^10.8.2"
   }
 }

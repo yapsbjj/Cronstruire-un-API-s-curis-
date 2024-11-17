@@ -11,7 +11,7 @@ router.post('/create', async (req, res) => {
         const newUser = new User({ username });
         await User.register(newUser, password);
 
-        // Afficher la vue users.ejs avec des données (optionnelles)
+        // Afficher la vue users.ejs avec des données
         res.render('users', { message: 'Utilisateur créé avec succès', user: newUser });
     } catch (err) {
         res.status(500).render('users', { message: 'Erreur lors de la création de l\'utilisateur', error: err.message });

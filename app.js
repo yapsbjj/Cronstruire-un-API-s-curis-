@@ -16,11 +16,11 @@ const authController = require('./controllers/authController.js');
 const reservationController = require('./controllers/reservationController.js');
 const isAuthenticated = require('./middleware/authMiddleware');
 
-const User = require('./models/userModel'); // Importer le modèle User
+const User = require('./models/userModel');
 
 // Configuration de la vue (ejs)
 app.set('view engine', 'ejs');
-app.use(express.static('public')); // Servir les fichiers statiques
+app.use(express.static('public'));
 
 // Middleware pour analyser le corps des requêtes POST
 app.use(express.json());
@@ -28,11 +28,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Middleware de session pour Passport.js
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'secret', // Utiliser un secret plus sécurisé en production
+  secret: process.env.SESSION_SECRET || 'secret', 
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI, // Récupérer l'URL de MongoDB depuis .env
+    mongoUrl: process.env.MONGODB_URI,
     ttl: 14 * 24 * 60 * 60 // Sessions valables 14 jours
   })
 }));
@@ -41,7 +41,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Configurer Passport pour utiliser la stratégie locale avec le modèle User
+
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());

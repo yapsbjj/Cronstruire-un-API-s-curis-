@@ -1,39 +1,60 @@
 const mongoose = require('mongoose');
 
-// Schéma pour les catways
+// schema pour Catway
 const catwaySchema = new mongoose.Schema({
   catwayNumber: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   type: {
     type: String,
-    enum: ['long', 'short'],
     required: true
   },
-  catwayState: String
-}, { collection: 'catways' });
+  catwayState: {
+    type: String,
+    required: true
+  }
+});
 
-// Définition du modèle Catway
+// Créer le modèle Catway
 const Catway = mongoose.model('Catway', catwaySchema);
 
-// Récupérer tous les catways
-const getAllCatways = async () => {
+// Fonction pour obtenir tous les catways
+async function getAllCatways() {
   try {
     const catways = await Catway.find();
     return catways;
   } catch (error) {
-    throw new Error('Erreur lors de la récupération des catways');
+    console.error('Erreur lors de la récupération des catways:', error);
+    throw error;
   }
-};
+}
 
-const getCatwayById = async (catwayId) => {
+// Fonction pour obtenir un catway par son identifiant
+async function getCatwayById(catwayId) {
   try {
+    // Vérifier si l'ID est valide
+    if (!mongoose.Types.ObjectId.isValid(catwayId)) {
+      throw new Error('Identifiant non valide');
+    }
+
+    // Chercher le catway dans la base de données par son ID
     const catway = await Catway.findById(catwayId);
+    if (!catway) {
+      throw new Error('Catway non trouvé');
+    }
+
     return catway;
   } catch (error) {
-    throw new Error('Erreur lors de la récupération de la catway par son identifiant');
+    console.error('Erreur lors de la récupération de la catway par son identifiant:', error.message);
+    throw error;
   }
-};
+}
 
-module.exports = { Catway, getAllCatways, getCatwayById };
+
+module.exports = {
+  Catway,
+  getAllCatways,
+  getCatwayById
+};
