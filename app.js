@@ -15,8 +15,13 @@ const usersRouter = require('./routes/users.js');
 const authController = require('./controllers/authController.js');
 const reservationController = require('./controllers/reservationController.js');
 const isAuthenticated = require('./middleware/authMiddleware');
+const methodOverride = require('method-override');
+
+
 
 const User = require('./models/userModel');
+
+app.use(methodOverride('_method'));
 
 // Configuration de la vue (ejs)
 app.set('view engine', 'ejs');

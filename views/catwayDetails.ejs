@@ -12,7 +12,7 @@
     <p>Description de l'état : <%= catway.catwayState %></p>
 
     <h3>Supprimer un Catway</h3>
-<form action="/catways/:id" method="POST">
+<form action="/catways/<%= catway._id %>?_method=DELETE" method="POST">
     <p>Êtes-vous sûr de vouloir supprimer ce catway ? Cette action est irréversible.</p>
     <button type="submit">Supprimer Catway</button>
 </form>
