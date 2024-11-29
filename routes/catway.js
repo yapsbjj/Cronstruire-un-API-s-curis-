@@ -1,28 +1,47 @@
+/**
+ * @file catway.js
+ * @description Routes pour la gestion des Catways.
+ */
+
 const express = require('express');
 const router = express.Router();
 const catwayController = require('../controllers/catwayController');
 const reservationController = require('../controllers/reservationController');
 
-// Route pour afficher tous les catways
+/**
+ * @route GET /catways
+ * @description Récupère tous les Catways.
+ */
 router.get('/', catwayController.getCatwaysPage);
 
-// Route pour afficher un catway spécifique par son identifiant
+/**
+ * @route GET /catways/:id
+ * @description Récupère un Catway spécifique par son identifiant.
+ */
 router.get('/:id', catwayController.getCatwayById);
 
-// Route pour créer un nouveau catway
+/**
+ * @route GET /catways/:id
+ * @description Récupère un Catway spécifique par son identifiant.
+ */
 router.post('/', catwayController.createCatway);
 
-// Route pour modifier un catway spécifique par son identifiant
+/**
+ * @route PUT /catways/:id
+ * @description Modifie un Catway existant.
+ */
 router.put('/:id', catwayController.updateCatway);
 
-// Route pour supprimer un catway spécifique par son identifiant
+/**
+ * @route DELETE /catways/:id
+ * @description Supprime un Catway spécifique.
+ */
 router.delete('/:id', catwayController.deleteCatway);
 
 // Route pour afficher le dashboard
 router.get('/dashboard', reservationController.showDashboard);
 
 module.exports = router;
-
 
 
 

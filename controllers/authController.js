@@ -1,5 +1,18 @@
+/**
+ * @file authController.js
+ * @description Contrôleur pour la gestion de l'authentification.
+ */
+
 const passport = require('passport');
 
+/**
+ * Gère le processus de connexion.
+ * @function login
+ * @param {Object} req - Objet de requête Express.
+ * @param {Object} res - Objet de réponse Express.
+ * @param {Function} next - Fonction middleware pour passer à l'étape suivante.
+ * @returns {void}
+ */
 exports.login = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
