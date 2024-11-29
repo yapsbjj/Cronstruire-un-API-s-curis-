@@ -23,6 +23,6 @@ exports.getApiDocumentation = (req, res) => {
   
       GET /documentation - Afficher la documentation de l'API
     `;
-    res.send(apiDocumentation);
+    res.render('documentation', { apiDocumentation });
   };
   

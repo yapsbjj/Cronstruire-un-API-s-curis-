@@ -7,6 +7,143 @@
 </head>
 <body>
     <h1>Documentation de l'API</h1>
-    <pre><%= apiDocumentation %></pre>
+   <h2>Vue d’ensemble</h2>
+<p>L'API Catway permet de gérer les Catways (quais) et les réservations de manière efficace. 
+    Elle est conçue pour être utilisée par des applications frontales, des systèmes tiers ou des développeurs souhaitant 
+    intégrer des fonctionnalités de gestion de Catways et de réservations dans leurs systèmes.</p>
+
+<h3>Principales fonctionnalités :</h3>
+<ul>
+<li>Création, mise à jour et suppression des Catways et des utilisateurs</li>
+<li>Récupération de la liste des Catways et des détails d’un Catway spécifique.</li>
+<li>Création et gestion des réservations liées aux Catways.</li>
+</ul>
+
+<h2>URL de base :</h2>
+<p>La base de l'API est <code></code>
+
+    <h2>Authentification :</h2>
+<p>L’API nécessite une authentification basée sur des tokens. Il faut se connecter avec un nom d'utilisateur et un mot de passe</p>
+
+<h2>Tutoriel</h2>
+<h3>Étape 1 : Récupérer tous les Catways</h3>
+    <p>Endpoint : GET /catways<br>
+
+Description : Récupère la liste de tous les Catways disponibles.<br>
+
+Requête :<br>
+Méthode : GET<br>
+URL : /catways<br>
+
+Réponse :<br>
+Statut : 200 OK<br>
+Corps de réponse (JSON) :<br>
+[
+  {
+    "id": "12345",
+    "catwayNumber": 1,
+    "type": "long",
+    "catwayState": "Disponible"
+  },<br>
+  {
+    "id": "67890",
+    "catwayNumber": 2,
+    "type": "short",
+    "catwayState": "Occupé"
+  }
+]</p>
+<h3>Étape 2 : Créer un Catway</h3>
+<p>Endpoint : POST /catways<br>
+
+Description : Ajoute un nouveau Catway à la liste.<br>
+
+Requête :<br>
+Méthode : POST<br>
+URL : /catways<br>
+En-têtes :<br>
+Content-Type: application/json<br>
+Corps de requête (JSON) :<br>
+{
+    "catwayNumber": 3,
+    "type": "short",
+    "catwayState": "Disponible"
+}<br>
+
+Réponse :<br>
+Statut : 201 Created<br>
+Corps de réponse (JSON) :json<br>
+{
+    "message": "Catway créé avec succès",
+    "catway": {
+      "id": "112233",
+      "catwayNumber": 3,
+      "type": "short",
+      "catwayState": "Disponible"
+    }
+}</p>
+
+<h3>Étape 3 : Modifier un Catway</h3>
+<p>Endpoint : PUT /catways/:id<br>
+
+Description : Met à jour les détails d’un Catway existant.<br>
+
+Requête :<br>
+Méthode : PUT<br>
+URL : /catways/112233<br>
+En-têtes :<br>
+Content-Type: application/json<br>
+Corps de requête (JSON) :<br>
+{
+    "catwayNumber": 3,
+    "type": "long",
+    "catwayState": "Réparations"
+  }<br>
+  Réponse :<br>
+Statut : 200 OK<br>
+Corps de réponse (JSON) :json<br>
+{
+    "message": "Catway modifié avec succès",
+    "catway": {
+      "id": "112233",
+      "catwayNumber": 3,
+      "type": "long",
+      "catwayState": "Réparations"
+    }
+}</p>
+<h3>Étape 4 : Supprimer un Catway</h3>
+<p>Endpoint : DELETE /catways/:id<br>
+
+Description : Supprime un Catway de la liste.<br>
+
+Requête :<br>
+Méthode : DELETE<br>
+URL : /catways/112233<br>
+En-têtes :<br>
+Réponse :<br>
+Statut : 200 OK<br>
+Corps de réponse (JSON) :json<br>
+
+{
+  "message": "Catway supprimé avec succès"
+}
+</p>
+<h2>Exemple</h2>
+
+<p>avec Postman<br>
+Importez l'URL dans Postman.<br>
+Configurez l'en-tête.<br>
+Envoyez la requête.</p>
+
+<h2>Glossaire</h2>
+<ul>
+<li>Catway : Une place pour les bateaux dans le port. Chaque Catway a un numéro, un type (long ou court), et un état (Disponible, Occupé, Réparations, etc.).</li>
+<li>Token : Un jeton utilisé pour authentifier les requêtes API. Généralement, un JWT (JSON Web Token).</li>
+<li>Endpoint : Une URL qui représente une fonctionnalité ou ressource spécifique de l’API.</li>
+<li>HTTP Method : La méthode utilisée pour interagir avec un endpoint (GET, POST, PUT, DELETE).</li>
+</ul>
+
+
+
+     <pre><%= apiDocumentation %></pre> -->
 </body>
 </html>
